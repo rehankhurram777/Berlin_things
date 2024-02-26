@@ -151,8 +151,14 @@ body {
 }
 
 .title-uppercase{
+  font-family: 'Georgia';
+  color: #FFF;
+  padding-top: 1rem;
+  font-size: 2em;
+  width: 100%;
   padding: 0.5rem;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .name{
@@ -164,19 +170,34 @@ body {
 }
 
 .explanation{
+  font-family: 'Georgia';
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 100;
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+  padding-bottom: 3.0rem;
+  text-align: left;
+  width: 70%;
   padding: 0.5rem;
 }
 
 .description{
-  padding: 0.25rem;
+  color: aliceblue;
+  line-height: 1.3em;
+  text-align: left;
+  width: 100%;
+  font-family:Helvetica
 }
 
 .destination{
   padding: 0.5rem;
+  font-weight: bold;
 }
 
 .to-do{
   padding: 0.25rem;
+  font-weight: bold;
 }
 
 .more-destination{
