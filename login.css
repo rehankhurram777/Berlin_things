@@ -1,0 +1,41 @@
+input[type=text] {
+    background-color: #3CBC8D;
+    color: white;
+  }
+
+  body {
+    /* Old browsers */
+    background: #141E30;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(-45deg, #35577D, #141E30);
+    color: whitesmoke;
+  }  
+  
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    border: 0.125rem solid LightGrey;
+    padding: 2rem 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .navigation a {
+    background: red;
+    border: 0.125rem solid red;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+  
+  }
+  
+  .navigation a:hover {
+    background: white;
+    border: 0.125rem solid red;
+    color: red;
+  }
