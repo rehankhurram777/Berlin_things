@@ -202,8 +202,32 @@ body {
     width: 100%;
     object-fit:cover;
   }
-  
 
+  .title-uppercase{
+    font-family: 'Georgia';
+    color: #FFF;
+    padding-top: 1rem;
+    font-size: 2em;
+    width: 100%;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  @media only screen and (min-width: 1024px) {
+    .hero-img {
+      height: 40vh;
+    }
+  }
+  
+  @media only screen and (max-width: 425px) {
+    .navigation {
+      flex-direction: column;
+    }
+    .navigation a {
+      border-radius: 0;
+    }
+  }
   
   
   

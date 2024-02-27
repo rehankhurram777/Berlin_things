@@ -257,6 +257,7 @@ ul {
 
 .hero-img-container a{
   display: flex;
+  justify-content: center;
 }
 .hero-img{
   max-height: 70vh;
@@ -264,3 +265,17 @@ ul {
   object-fit:cover;
 }
 
+@media only screen and (min-width: 1024px) {
+  .hero-img {
+    height: 40vh;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .navigation {
+    flex-direction: column;
+  }
+  .navigation a {
+    border-radius: 0;
+  }
+}
