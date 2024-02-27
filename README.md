@@ -1,1 +1,2 @@
 # Berlin_things
+This project is about a website called Berlin things, which includes three different pages; the main page called Berlin things, the About Me page and the Login page. This website is the place where people would be able to find things to do in berlin as a tourist. 

@@ -135,11 +135,6 @@ table {
   border-spacing: 0;
 }
 
-
-
-
-
-
 body {
   /* Old browsers */
   background: #141E30;
@@ -225,7 +220,6 @@ a:hover {
 ul {
   padding: 0.5rem;
   list-style:circle;
-  border: solid red;
 }
 
 .navigation {
