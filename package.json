@@ -1,0 +1,21 @@
+{
+  "name": "web_dev_projects",
+  "version": "1.0.0",
+  "description": "berlinthings web",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
+
+
+
+
