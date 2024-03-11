@@ -25,6 +25,8 @@ app.post('/contact', (request, response) => {
   response.send('Thank you for your message. We will be in touch soon.')
 })
 
+app.get('*', (_, response)=> response.status(404).send("error this site cannot be reached right now"))
+
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`)
 })
