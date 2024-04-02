@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>Berlin things</title>
-  <link href='locations/style.css' rel='stylesheet'>
-</head>
+<%- include('./things/head', {title: 'index'}) %>
+
+<main>
+  <p>current blog:</p>
+  <ul>
+    <% things.forEach(things => {%>
+      <li>
+        <% if(things.updated) { %>
+        <a href="/things/<%= things.slug %>"><%= things.name %></a>
+        <% } else { %>
+          <%= things.updated %> [PAGE NOT UPDATED]
+        <% } %>
+      </li>
+    <%}) %>
+
+  </ul>
+</main>
 
 <body>
-
-<nav class="navigation">
-  <a href="./index.html">Berlin things</a>
-  <a href="./aboutme.html">About Me</a>
-  <a href="./login.html">log in</a>
-</nav>
 
   <a
     href="https://unsplash.com/photos/city-buildings-near-body-of-water-during-daytime-1uWanmgkd5g" target=_blank>
   <div class="hero-img-container"><img class="hero-img" src='https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="scenic picture of Berlin" width="1245px"/></a></div>
   <h1 class='title-uppercase' id='article-title'>Top Berlin Spots</h1>
   <h5 class="name">By: Rehan Khurram</h5>
-  <h6 class="Published">Published: 1 Day Ago</h6>
+  <p>Published <%= numberOfDaysPublished %> day ago</p>
+  
+
 
   <p class="explanation">The Berlin is full of fascinating places. Planning the perfect trip involves packing up, leaving home, and experiencing something new.</p>
 
@@ -71,5 +80,3 @@
 </body>
 
 </html>
-
-

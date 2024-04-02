@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./things/head', {title: "New berlin thing | Berlin "}) %>
+<body>
+
+  <main>
+    <h2>Create a new Berlin thing</h2>
+
+    <form action="/index" method="POST">
+      <input type="text" name="name" placeholder="name" required /><br />
+      <input type="text" name="slug" placeholder="slug" required /><br />
+      <button>Save</button>
+    </form>
+  </main>
+</body>
+</html>
