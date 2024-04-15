@@ -3,7 +3,7 @@
 
 Berlin Things is a web application that allows users to view, create, edit, and delete information about various places in Berlin.
 
-To access the form linked to the database you have to use /things/new.
+To access the form linked to the database click on the link: "add new berlin thing" and to edit you have to type in index/(enter the slug you created) and for delete do the same and add /delete at the end and it will delete the page.
 
 ## Features
 
