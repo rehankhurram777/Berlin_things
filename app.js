@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { logger } from './middlewares/logger.js';
+import methodOverride from 'method-override';
+
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -8,6 +10,7 @@ const PORT = 3000;
 
 app.use('/locations', express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(logger);
 
 const thingsSchema = new mongoose.Schema({
@@ -32,35 +35,36 @@ app.post('/index', async (request, response) => {
 mongoose.connect("mongodb+srv://rehankhurram:Y1bRQQzYVxKIvB4Y@berlinthings.3hwjb8l.mongodb.net/?retryWrites=true&w=majority&appName=Berlinthings")
   .then(() => console.log('💽 Database connected'))
   .catch(error => console.error(error));
+//new
+  app.route('/index/:slug')
+  .get(async (request, response) => {
+    try {
+      const slug = request.params.slug;
+      const things = await Things.findOne({ slug: slug }).exec();
+      if (!things) throw new Error('Berlinthing not found');
+      response.render('edit', { things: things });
+    } catch (error) {
+      console.error(error);
+      response.status(404).send('Could not find the Berlin thing you\'re looking for.');
+    }
+  })
+  .patch(async (request, response) => {
+    try {
+      const things = await Things.findOneAndUpdate(
+        { slug: request.params.slug },
+        request.body,
+        { new: true }
+      );
+      // Render fix
+      response.render('edit', { things: things });
+    } catch (error) {
+      console.error(error);
+      response.status(200).send('Error: The Berlin thing could not be updated: ' + error.message);
+    }
+  });
 
-app.get('/index/:slug/edit', async (request, response) => {
-  try {
-    const slug = request.params.slug
-    const things = await Things.findOne({ slug: slug }).exec()
-    if(!things) throw new Error('Berlinthing not found')
 
-    response.render('edit', { things: things })
-  }catch(error) {
-    console.error(error)
-    response.status(404).send('Could not find the Berlin thing you\'re looking for.')
-  }
-})
-
-app.post('/index/:slug', async (request, response) => {
-  try {
-    const things = await Things.findOneAndUpdate(
-      { slug: request.params.slug }, 
-      request.body,
-      { new: true}
-    )
-    response.redirect(`/index/${things.slug}`)
-  }catch (error) {
-    console.error(error)
-    response.send('Error: The Berlin thing could not be update.')
-  }
-})
-
-app.get('/index/new', async (request, response) => {
+app.get('/things/new', async (request, response) => {
   try {
     const things = await Things.find({}).exec();
     response.render('new', { things });
@@ -70,16 +74,28 @@ app.get('/index/new', async (request, response) => {
   }
 });
 
-app.get('/index/:slug/delete', async (request, response) => {
-try {
-  await Things.findOneAndDelete({ slug: request.params.slug})
-  
-  response.redirect('/index')
-}catch (error) {
-  console.error(error)
-  response.send('Error: No Berlin thing was deleted.')
-}
-})
+
+app.route('/index/:slug')
+  .get(async (request, response) => {
+    try {
+      await Things.findOneAndDelete({ slug: request.params.slug });
+      
+      response.redirect('/index');
+    } catch (error) {
+      console.error(error);
+      response.send('Error: No Berlin thing was deleted.');
+    }
+  })
+  .post(async (request, response) => {
+    try {
+      await Things.findOneAndDelete({ slug: request.params.slug });
+      // new fix
+      response.redirect('/index');
+    } catch (error) {
+      console.error(error);
+      response.send('Error: No Berlin thing was deleted.');
+    }
+  });
 
 
 app.get(['/', '/index.html'], (request, response) => {
@@ -112,7 +128,7 @@ app.post('/contact', (request, response) => {
   response.send('Thank you for your message. We will be in touch soon.');
 });
 
-app.get('*', (_, response) => response.status(404).send("error this site cannot be reached right now"));
+app.get('*', (_, response) => response.status(404).send("this page doesnt exist lol noob"));
 
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`);

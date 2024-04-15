@@ -6,7 +6,8 @@
   <main>
     <h2>Edit a Berlin thing</h2>
 
-    <form action="/index/<%= things.slug %>" method="POST">
+  
+    <form action="/index/<%= things.slug %>?_method=PATCH" method="POST">
       <input type="text" value="<%= things.name %>" name="name" placeholder="name" /><br />
       <input type="text" value="<%= things.slug %>" name="slug" placeholder="slug" /><br />
       <button>Save</button>
