@@ -128,7 +128,7 @@ app.post('/contact', (request, response) => {
   response.send('Thank you for your message. We will be in touch soon.');
 });
 
-app.get('*', (_, response) => response.status(404).send("this page doesnt exist lol noob"));
+app.get('*', (_, response) => response.status(404).send("this page doesnt exist lol"));
 
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`);
