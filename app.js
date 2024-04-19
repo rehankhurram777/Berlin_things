@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import { logger } from './middlewares/logger.js';
 import methodOverride from 'method-override';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -32,10 +35,23 @@ app.post('/index', async (request, response) => {
   }
 });
 
-mongoose.connect("mongodb+srv://rehankhurram:Y1bRQQzYVxKIvB4Y@berlinthings.3hwjb8l.mongodb.net/?retryWrites=true&w=majority&appName=Berlinthings")
-  .then(() => console.log('💽 Database connected'))
-  .catch(error => console.error(error));
-//new
+
+
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('💽 Database connected'))
+.catch(error => console.error(error));
+
+
+//mongoose.connect("mongodb+srv://rehankhurram:Y1bRQQzYVxKIvB4Y@berlinthings.3hwjb8l.mongodb.net/?retryWrites=true&w=majority&appName=Berlinthings")
+ // .then(() => console.log('💽 Database connected'))
+  //.catch(error => console.error(error));
+
+
+
   app.route('/index/:slug')
   .get(async (request, response) => {
     try {
@@ -55,7 +71,8 @@ mongoose.connect("mongodb+srv://rehankhurram:Y1bRQQzYVxKIvB4Y@berlinthings.3hwjb
         request.body,
         { new: true }
       );
-      // Render fix
+       //Render fix
+      response.send('Berlin thing edited');
       response.render('edit', { things: things });
     } catch (error) {
       console.error(error);
@@ -75,27 +92,29 @@ app.get('/things/new', async (request, response) => {
 });
 
 
-app.route('/index/:slug')
-  .get(async (request, response) => {
+  app.delete('/index/:slug', async (request, response) => {
     try {
       await Things.findOneAndDelete({ slug: request.params.slug });
-      
+      // Redirect to the index page after successful deletion
       response.redirect('/index');
+      response.send('Berlin thing deleted');
     } catch (error) {
       console.error(error);
-      response.send('Error: No Berlin thing was deleted.');
-    }
-  })
-  .post(async (request, response) => {
-    try {
-      await Things.findOneAndDelete({ slug: request.params.slug });
-      // new fix
-      response.redirect('/index');
-    } catch (error) {
-      console.error(error);
-      response.send('Error: No Berlin thing was deleted.');
+      response.status(500).send('Error: The Berlin thing could not be deleted.');
     }
   });
+  
+
+  //.post(async (request, response) => {
+    //try {
+      //await Things.findOneAndDelete({ slug: request.params.slug });
+      // new fix
+      //response.redirect('/index');
+    //} catch (error) {
+      //console.error(error);
+      //response.send('Error: No Berlin thing was deleted.');
+    //}
+  //});
 
 
 app.get(['/', '/index.html'], (request, response) => {
