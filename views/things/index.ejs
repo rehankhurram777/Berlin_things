@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>current things</title>
+</head>
+<body>
+    <h1>current things:</h1>
+    <!--
+        <ul>
+        <li>
+            <% things.forEach(thing => { %>
+                <a href="/things/<%= things.slug%>"><%= things.name%></a>
+        </li> 
+        <% }) %>
+    </ul> -->
+
+    <ul>
+        <% things.forEach(things => {%>
+          <li>
+            <% if(things.updated) { %>
+            <a href="/things/<%= things.slug %>"><%= things.name %></a>
+            <% } else { %>
+              <%= things.updated %> [PAGE NOT UPDATED]
+            <% } %>
+          </li>
+        <%}) %>
+    
+    </ul>
+</body>
+</html>
